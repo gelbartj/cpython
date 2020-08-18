@@ -1136,15 +1136,18 @@ trailing newline from a string.
 How do I iterate over a sequence in reverse order?
 --------------------------------------------------
 
-Use the :func:`reversed` built-in function, which is new in Python 2.4::
+Use the :func:`reversed` built-in function::
 
    for x in reversed(sequence):
        ...  # do something with x ...
 
-This won't touch your original sequence, but build a new copy with reversed
-order to iterate over.
+This returns an iterator over the items in your original sequence, in reverse order.
+Note that this is not a copy:: if the original sequence changes after the `reversed` 
+iterator is created, the iterator will reflect any of those changes.
 
-With Python 2.3, you can use an extended slice syntax::
+If you need an independent copy of the reversed sequence or need to index into it, 
+you can convert the iterator to a list using `list(reversed(sequence))` or use 
+extended slice syntax::
 
    for x in sequence[::-1]:
        ...  # do something with x ...
